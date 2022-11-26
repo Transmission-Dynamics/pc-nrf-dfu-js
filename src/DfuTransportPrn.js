@@ -292,7 +292,9 @@ export default class DfuTransportPrn extends DfuAbstractTransport {
                     // Send more stuff
                         return this.writeObjectPiece(
                             bytes.subarray(sendLength),
-                            newCrcSoFar, newOffsetSoFar, newPrnCount
+                            newCrcSoFar,
+                            newOffsetSoFar,
+                            newPrnCount
                         );
                     }
                     return [newOffsetSoFar, newCrcSoFar];

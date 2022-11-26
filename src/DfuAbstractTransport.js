@@ -86,7 +86,6 @@ export default class DfuAbstractTransport {
         return this.sendPayload(0x02, bytes);
     }
 
-
     // Sends either a init payload ("init packet"/"command object") or a data payload
     // ("firmware image"/"data objects")
     sendPayload(type, bytes, resumeAtChunkBoundary = false) {
@@ -124,8 +123,12 @@ export default class DfuAbstractTransport {
                     const end = Math.min(bytes.length, (offset + chunkSize) - (offset % chunkSize));
 
                     return this.sendAndExecutePayloadChunk(
-                        type, bytes, offset,
-                        end, chunkSize, crc
+                        type,
+                        bytes,
+                        offset,
+                        end,
+                        chunkSize,
+                        crc
                     );
                 }
 
@@ -144,7 +147,6 @@ export default class DfuAbstractTransport {
                 .then(() => this.sendAndExecutePayloadChunk(type, bytes, 0, end, chunkSize));
         });
     }
-
 
     // Sends *one* chunk.
     // Sending a chunk involves:
@@ -166,7 +168,11 @@ export default class DfuAbstractTransport {
 
                 return this.createObject(type, nextEnd - end)
                     .then(() => this.sendAndExecutePayloadChunk(
-                        type, bytes, end, nextEnd, chunkSize,
+                        type,
+                        bytes,
+                        end,
+                        nextEnd,
+                        chunkSize,
                         crc32(bytes.subarray(0, end))
                     ));
             });
@@ -211,12 +217,16 @@ export default class DfuAbstractTransport {
 
                 return this.createObject(type, end - start)
                     .then(() => this.sendPayloadChunk(
-                        type, bytes, newStart, end,
-                        chunkSize, rewoundCrc, retries + 1
+                        type,
+                        bytes,
+                        newStart,
+                        end,
+                        chunkSize,
+                        rewoundCrc,
+                        retries + 1
                     ));
             });
     }
-
 
     // The following 5 methods have a 1-to-1 mapping to the 5 DFU requests
     // documented at http://infocenter.nordicsemi.com/index.jsp?topic=%2Fcom.nordic.infocenter.sdk5.v14.0.0%2Flib_dfu_transport.html

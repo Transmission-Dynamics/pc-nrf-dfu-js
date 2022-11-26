@@ -43,8 +43,7 @@ import DfuTransportSerial from './DfuTransportSerial';
 import { DfuError, ErrorCode } from './DfuError';
 
 const debug = Debug('dfu:usbserial');
-const SerialPort = require('serialport');
-
+const { SerialPort } = require('serialport');
 
 /**
  * USB serial DFU transport. Supports Nordic USB devices.

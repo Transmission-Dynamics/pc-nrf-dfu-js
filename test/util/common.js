@@ -36,7 +36,7 @@
 
 'use strict';
 
-const SerialPort = require('serialport');
+const { SerialPort } = require('serialport');
 const debug = require('debug')('dfu:test');
 
 module.exports.findPort = async serialNumber => {

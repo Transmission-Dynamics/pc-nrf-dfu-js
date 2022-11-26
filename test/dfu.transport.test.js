@@ -91,7 +91,7 @@ describe('The DFU Transport', () => {
     it('shall abort', async () => {
         expect(port).not.toBeNull();
         const transportSerial = new nrfDfu.DfuTransportSerial(port);
-        const result  = await transportSerial.abort();
+        const result = await transportSerial.abort();
         expect(result).not.toBeNull();
         await new Promise(resolve => {
             port.close(() => setTimeout(resolve, testDelay));
