@@ -109,7 +109,7 @@ export default class DfuTransportUsbSerial extends DfuTransportSerial {
         }
         return this.findPort()
             .then(port => {
-                this.port = new SerialPort(port.path, { baudRate: 115200, autoOpen: false });
+                this.port = new SerialPort({ path: port.path, baudRate: 115200, autoOpen: false });
                 return super.open();
             });
     }
