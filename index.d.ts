@@ -1,3 +1,4 @@
+import { type EventEmitter } from "events";
 import { type SerialPort } from "serialport";
 
 /**
@@ -11,7 +12,7 @@ declare module "@transmission-dynamics/pc-nrf-dfu-js" {
     static fromZipFilePath(path: string): Promise<DfuUpdates>;
   }
 
-  export class DfuTransportSerial {
+  export class DfuTransportSerial extends EventEmitter {
     constructor(port: SerialPort, packetReceiveNotification?: number);
   }
 
