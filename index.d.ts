@@ -1,3 +1,5 @@
+import { type SerialPort } from "serialport";
+
 /**
  * Only types which where needed are written below
  */
@@ -10,7 +12,7 @@ declare module "@transmission-dynamics/pc-nrf-dfu-js" {
   }
 
   export class DfuTransportSerial {
-    constructor(port: unknown, packetReceiveNotification?: number);
+    constructor(port: SerialPort, packetReceiveNotification?: number);
   }
 
   export class DfuOperation {
