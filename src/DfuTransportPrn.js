@@ -174,13 +174,13 @@ export default class DfuTransportPrn extends DfuAbstractTransport {
     // If there were any errors, returns a rejected Promise with an error message.
     parse(bytes) { // eslint-disable-line class-methods-use-this
         if (bytes[0] !== 0x60) {
-            return Promise.reject(new DfuError(ErrorCode.ERROR_RESPONSE_NOT_START_WITH_0x60));
+            throw new DfuError(ErrorCode.ERROR_RESPONSE_NOT_START_WITH_0x60);
         }
         const opcode = bytes[1];
         const resultCode = bytes[2];
         if (resultCode === ErrorCode.ERROR_MESSAGE_RSP) {
             debug('Parsed DFU response packet: opcode ', opcode, ', payload: ', bytes.subarray(3));
-            return Promise.resolve([opcode, bytes.subarray(3)]);
+            return [opcode, bytes.subarray(3)];
         }
 
         let errorCode;
@@ -204,7 +204,7 @@ export default class DfuTransportPrn extends DfuAbstractTransport {
         }
 
         debug(errorCode, errorStr);
-        return Promise.reject(new DfuError(errorCode, errorStr));
+        throw new DfuError(errorCode, errorStr);
     }
 
     // Returns a *function* that checks a [opcode, bytes] parameter against the given
