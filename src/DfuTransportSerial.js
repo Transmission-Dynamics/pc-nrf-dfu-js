@@ -129,8 +129,12 @@ export default class DfuTransportSerial extends DfuTransportPrn {
     // Callback when raw (yet undecoded by SLIP) data is being read from the serial port instance.
     // Called only internally.
     onRawData(data) {
-        debug(' recv <-- ', data);
-        return this.slipDecoder.decode(data);
+        try {
+            debug(' recv <-- ', data);
+            this.slipDecoder.decode(data);
+        } catch (error) {
+            this.emit('error', error);
+        }
     }
 
     // Initializes DFU procedure: sets the PRN and requests the MTU.

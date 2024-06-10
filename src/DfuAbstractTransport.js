@@ -38,6 +38,7 @@
  *
  */
 
+import { EventEmitter } from 'node:events';
 import crc32 from './util/crc32';
 import { DfuError, ErrorCode } from './DfuError';
 
@@ -50,8 +51,9 @@ const debug = require('debug')('dfu:transport');
  * and complete the functionality of the needed methods with the actual transport
  * logic.
  */
-export default class DfuAbstractTransport {
+export default class DfuAbstractTransport extends EventEmitter {
     constructor() {
+        super();
         if (this.constructor === DfuAbstractTransport) {
             throw new DfuError(ErrorCode.ERROR_CAN_NOT_INIT_ABSTRACT_TRANSPORT);
         }
