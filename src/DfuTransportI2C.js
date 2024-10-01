@@ -78,7 +78,7 @@ export default class DfuTransportI2C extends DfuTransportPrn {
         // Cast the Uint8Array info a Buffer so it works on nodejs v6
         encoded = Buffer.from(encoded);
 
-        i2c_transfer(this.bus, this.addr, encoded).then(data => {
+        i2c_transfer(this.bus, this.addr, encoded, 57).then(data => {
             debug(' send --> ', encoded);
             if (data.length > 1) {
                 this.onRawData(data.slice(1, data[0]));

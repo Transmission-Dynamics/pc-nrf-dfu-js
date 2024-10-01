@@ -7,14 +7,14 @@ import pkg from './package.json';
 
 export default {
     input: 'src/index.js',
-    external: ['buffer', 'fs', 'debug'],
+    external: ['buffer', 'fs', 'debug', '@transmission-dynamics/i2c-transfer'],
     output: {
         file: pkg.main,
         format: 'cjs',
         sourcemap: true,
     },
     plugins: [
-        eslint(),
+        // eslint(),
         resolve({ preferBuiltins: true }),
         builtins(),
         commonjs({
