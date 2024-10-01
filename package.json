@@ -15,7 +15,13 @@
     "lint": "eslint src/"
   },
   "peerDependencies": {
-    "serialport": ">=10.5.0 <13.0.0"
+    "serialport": ">=10.5.0 <13.0.0",
+    "@transmission-dynamics/i2c-transfer": "*"
+  },
+  "peerDependenciesMeta": {
+    "@transmission-dynamics/i2c-transfer": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.2",
