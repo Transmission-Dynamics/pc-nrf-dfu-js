@@ -80,14 +80,14 @@ export default class DfuTransportI2C extends DfuTransportPrn {
         // Cast the Uint8Array info a Buffer so it works on nodejs v6
         encoded = Buffer.from(encoded);
 
-        debug(` writeCommand --> i2c-${this.bus}@${this.addr.toString(16)}: ${encoded.toString('hex')}`);
+        debug(` writeCommand --> ${this.bus}@${this.addr.toString(16)}: ${encoded.toString('hex')}`);
         return i2c_transfer(this.bus, this.addr, encoded, fixedReadSize).then(data => {
-            debug(` writeCommand <-- i2c-${this.bus}@${this.addr.toString(16)}: ${data.toString('hex')}`);
+            debug(` writeCommand <-- ${this.bus}@${this.addr.toString(16)}: ${data.toString('hex')}`);
             if (data.length > 1) {
                 this.onRawData(data.slice(1, data[0] + 1));
             }
         }).catch(error => {
-            debug(` writeCommand <-- i2c-${this.bus}@${this.addr.toString(16)}: error: ${error}`);
+            debug(` writeCommand <-- ${this.bus}@${this.addr.toString(16)}: error: ${error}`);
             throw error;
         });
     }
