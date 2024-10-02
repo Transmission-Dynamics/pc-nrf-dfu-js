@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
 import eslint from '@rollup/plugin-eslint';
+import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 
 export default {
@@ -27,5 +28,12 @@ export default {
             include: 'node_modules/**',
         }),
         globals(),
+        copy({
+            targets: [
+                { src: 'types/*.d.ts', dest: 'dist' },
+            ],
+            verbose: true,
+            copyOnce: true,
+        }),
     ],
 };

@@ -1,5 +1,5 @@
-const { DfuOperation, DfuUpdates } = require('./dist/nrf-dfu.cjs.js');
-const { DfuTransportI2C } = require('./dist/DfuTransportI2C.js');
+const { DfuOperation, DfuUpdates } = require('@transmission-dynamics/pc-nrf-dfu-js');
+const { DfuTransportI2C } = require('@transmission-dynamics/pc-nrf-dfu-js/dist/DfuTransportI2C.js');
 
 (async () => {
     try {
@@ -8,7 +8,7 @@ const { DfuTransportI2C } = require('./dist/DfuTransportI2C.js');
         const firmwarePath = process.argv[4];
 
         if (!bus || !addr || !firmwarePath) {
-            throw new Error('Usage: ./node serial_firmware_update.js <bus> <addr> <firmware-path>');
+            throw new Error('Usage: ./node i2c-firmware-update.js <bus> <addr> <firmware-path>');
         }
 
         console.log(`Updating firmware on ${bus} with address ${addr} from ${firmwarePath}`);

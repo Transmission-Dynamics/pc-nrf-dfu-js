@@ -37,6 +37,7 @@
     "jest-serializer-path": "^0.1.15",
     "jszip": "^3.2.2",
     "rollup": "^3.4.0",
+    "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "serialport": "^10.5.0"
