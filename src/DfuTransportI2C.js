@@ -39,6 +39,7 @@
  */
 
 import Debug from 'debug';
+// eslint-disable-next-line import/no-unresolved, camelcase
 import { i2c_transfer } from '@transmission-dynamics/i2c-transfer';
 import * as slip from './util/slip';
 import { DfuError, ErrorCode } from './DfuError';
@@ -78,7 +79,8 @@ export default class DfuTransportI2C extends DfuTransportPrn {
         // Cast the Uint8Array info a Buffer so it works on nodejs v6
         encoded = Buffer.from(encoded);
 
-        i2c_transfer(this.bus, this.addr, encoded, 57).then(data => {
+        const fixedReadSize = 58;
+        i2c_transfer(this.bus, this.addr, encoded, fixedReadSize).then(data => {
             debug(' send --> ', encoded);
             if (data.length > 1) {
                 this.onRawData(data.slice(1, data[0]));

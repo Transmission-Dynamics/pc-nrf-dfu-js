@@ -15,8 +15,8 @@
     "lint": "eslint src/"
   },
   "peerDependencies": {
-    "serialport": ">=10.5.0 <13.0.0",
-    "@transmission-dynamics/i2c-transfer": "*"
+    "@transmission-dynamics/i2c-transfer": "*",
+    "serialport": ">=10.5.0 <13.0.0"
   },
   "peerDependenciesMeta": {
     "@transmission-dynamics/i2c-transfer": {

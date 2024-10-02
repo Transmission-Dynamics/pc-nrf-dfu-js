@@ -1,6 +1,12 @@
 import { type EventEmitter } from "events";
 import { type SerialPort } from "serialport";
 
+declare module "@transmission-dynamics/pc-nrf-dfu-js/DfuTransportI2C.js" {
+  export class DfuTransportI2C extends EventEmitter {
+    constructor(bus: string, addr: number, packetReceiveNotification?: number);
+  }
+}
+
 /**
  * Only types which where needed are written below
  */
