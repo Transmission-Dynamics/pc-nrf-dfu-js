@@ -1,5 +1,5 @@
 const { DfuOperation, DfuUpdates } = require('@transmission-dynamics/pc-nrf-dfu-js');
-const { DfuTransportI2C } = require('@transmission-dynamics/pc-nrf-dfu-js/dist/DfuTransportI2C.js');
+const DfuTransportI2C = require('@transmission-dynamics/pc-nrf-dfu-js/dist/DfuTransportI2C.js');
 
 (async () => {
     try {
