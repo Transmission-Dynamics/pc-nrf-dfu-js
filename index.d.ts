@@ -14,6 +14,15 @@ declare module "@transmission-dynamics/pc-nrf-dfu-js" {
 
   export class DfuTransportSerial extends EventEmitter {
     constructor(port: SerialPort, packetReceiveNotification?: number);
+
+    on(event: 'progress', listener: (prograss: {
+      currentUpdateId: number;
+      totalUpdates: number;
+      part: 'init' | 'firmware';
+      bytesSent: number;
+      totalBytes: number;
+    }) => void): this;
+    on(event: 'error', listener: (error: Error) => void): this;
   }
 
   export class DfuOperation {
@@ -76,7 +85,7 @@ declare module "@transmission-dynamics/pc-nrf-dfu-js" {
   };
 
   class DfuError extends Error {
-    constructor(code: ErrorCode, message?: string);
-    static getErrorMessage(code: ErrorCode): any;
+    constructor(code: number, message?: string);
+    static getErrorMessage(code: number): any;
   }
 }
