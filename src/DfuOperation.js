@@ -107,7 +107,11 @@ export default class DfuOperation {
         }
 
         return start
-            .then(() => this.transport.sendInitPacket(this.updates[updateNumber].initPacket))
+            .then(() => this.transport.sendInitPacket(
+                this.updates[updateNumber].initPacket,
+                updateNumber,
+                this.updates.length
+            ))
             .then(() => this.transport.sendFirmwareImage(this.updates[updateNumber].firmwareImage))
             .then(() => this.performNextUpdate(updateNumber + 1, forceful));
     }

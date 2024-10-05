@@ -57,6 +57,8 @@ export default class DfuAbstractTransport extends EventEmitter {
         if (this.constructor === DfuAbstractTransport) {
             throw new DfuError(ErrorCode.ERROR_CAN_NOT_INIT_ABSTRACT_TRANSPORT);
         }
+        this.currentUpdateId = 0;
+        this.totalUpdates = 0;
     }
 
     // Restarts the DFU procedure by sending a create command of
@@ -78,7 +80,9 @@ export default class DfuAbstractTransport extends EventEmitter {
 
     // Given a Uint8Array, sends it as an init payload / "command object".
     // Returns a Promise.
-    sendInitPacket(bytes) {
+    sendInitPacket(bytes, currentUpdateId, totalUpdates) {
+        this.currentUpdateId = currentUpdateId;
+        this.totalUpdates = totalUpdates;
         return this.sendPayload(0x01, bytes);
     }
 
@@ -203,6 +207,14 @@ export default class DfuAbstractTransport extends EventEmitter {
                 } else {
                     debug(`Explicit checksum OK at ${end} bytes`);
                 }
+
+                this.emit('progress', {
+                    currentUpdateId: this.currentUpdateId,
+                    totalUpdates: this.totalUpdates,
+                    part: type === 0x01 ? 'init' : 'firmware',
+                    bytesSent: end,
+                    totalBytes: bytes.length,
+                });
             })
             .catch(err => {
                 if (retries >= 5) {
