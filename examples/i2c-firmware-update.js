@@ -14,8 +14,14 @@ const DfuTransportI2C = require('@transmission-dynamics/pc-nrf-dfu-js/dist/DfuTr
         console.log(`Updating firmware on ${bus} with address ${addr} from ${firmwarePath}`);
 
         const updates = await DfuUpdates.fromZipFilePath(firmwarePath);
-        const serialTransport = new DfuTransportI2C(bus, addr, 1);
-        const dfu = new DfuOperation(updates, serialTransport);
+        const transport = new DfuTransportI2C(bus, addr, 1);
+        transport.on('progress', progress => {
+            console.log(`Progress: ${JSON.stringify(progress, null, 2)}`);
+        });
+        transport.on('error', error => {
+            console.error(`Error: ${error}`);
+        });
+        const dfu = new DfuOperation(updates, transport);
         await dfu.start(true);
         console.log('Firmware update completed');
     } catch (e) {
