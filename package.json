@@ -1,6 +1,6 @@
 {
   "name": "@transmission-dynamics/pc-nrf-dfu-js",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "JS implementation of the nRF DFU protocol",
   "esnext:main": "src/index.js",
   "main": "dist/nrf-dfu.cjs.js",
@@ -15,7 +15,7 @@
     "lint": "eslint src/"
   },
   "peerDependencies": {
-    "@transmission-dynamics/i2c-transfer": "*",
+    "@transmission-dynamics/i2c-transfer": "^2.0.0",
     "serialport": ">=10.5.0 <13.0.0"
   },
   "peerDependenciesMeta": {

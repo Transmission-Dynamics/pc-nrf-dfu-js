@@ -39,8 +39,7 @@
  */
 
 import Debug from 'debug';
-// eslint-disable-next-line import/no-unresolved, camelcase
-import { i2c_transfer } from '@transmission-dynamics/i2c-transfer';
+import { i2cTransfer } from '@transmission-dynamics/i2c-transfer';
 import * as slip from './util/slip';
 import { DfuError, ErrorCode } from './DfuError';
 import DfuTransportPrn from './DfuTransportPrn';
@@ -81,7 +80,7 @@ export default class DfuTransportI2C extends DfuTransportPrn {
         encoded = Buffer.from(encoded);
 
         debug(` writeCommand --> ${this.bus}@${this.addr.toString(16)}: ${encoded.toString('hex')}`);
-        return i2c_transfer(this.bus, this.addr, encoded, fixedReadSize).then(data => {
+        return i2cTransfer(this.bus, this.addr, encoded, fixedReadSize).then(data => {
             debug(` writeCommand <-- ${this.bus}@${this.addr.toString(16)}: ${data.toString('hex')}`);
             if (data.length > 1) {
                 this.onRawData(data.slice(1, data[0] + 1));
