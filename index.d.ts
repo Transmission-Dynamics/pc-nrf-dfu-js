@@ -5,6 +5,14 @@ import { type SerialPort } from "serialport";
  * Only types which where needed are written below
  */
 declare module "@transmission-dynamics/pc-nrf-dfu-js" {
+  export interface DfuProgressUpdate {
+    currentUpdateId: number;
+    totalUpdates: number;
+    part: 'init' | 'firmware';
+    bytesSent: number;
+    totalBytes: number;
+  }
+
   export class DfuUpdates {
     constructor(
       updates?: { initPacket: Uint8Array; firmwareImage: Uint8Array }[]
@@ -15,13 +23,7 @@ declare module "@transmission-dynamics/pc-nrf-dfu-js" {
   export class DfuTransportSerial extends EventEmitter {
     constructor(port: SerialPort, packetReceiveNotification?: number);
 
-    on(event: 'progress', listener: (prograss: {
-      currentUpdateId: number;
-      totalUpdates: number;
-      part: 'init' | 'firmware';
-      bytesSent: number;
-      totalBytes: number;
-    }) => void): this;
+    on(event: 'progress', listener: (prograss: DfuProgressUpdate) => void): this;
     on(event: 'error', listener: (error: Error) => void): this;
   }
 
