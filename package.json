@@ -12,8 +12,7 @@
   "scripts": {
     "rollup": "rollup -c rollup.config.js --bundleConfigAsCjs",
     "test": "rollup -c rollup.config.js --bundleConfigAsCjs && jest --detectOpenHandles --runInBand",
-    "lint": "eslint src/",
-    "publish": "npm publish --access public"
+    "lint": "eslint src/"
   },
   "peerDependencies": {
     "@transmission-dynamics/i2c-transfer": "^3.0.0",
