@@ -32,6 +32,11 @@ declare module "@transmission-dynamics/pc-nrf-dfu-js" {
     public start(forceful: boolean): Promise<unknown>;
   }
 
+  export class DfuTransportUsbSerial extends EventEmitter {
+    constructor(serialNumber: string, packetReceiveNotification?: number);
+    public waitForDisconnect(): Promise<void>;
+  }
+
   const ErrorCode: {
     ERROR_MESSAGE: number;
     ERROR_MESSAGE_RSP: number;
