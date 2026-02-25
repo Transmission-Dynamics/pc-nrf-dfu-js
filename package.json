@@ -1,6 +1,6 @@
 {
   "name": "@transmission-dynamics/pc-nrf-dfu-js",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "JS implementation of the nRF DFU protocol",
   "esnext:main": "src/index.js",
   "main": "dist/nrf-dfu.cjs.js",
